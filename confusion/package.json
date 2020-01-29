@@ -2,6 +2,7 @@
   "name": "confusion",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://devjoshi030.github.io/First_React_App/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -9,6 +10,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-social": "^5.1.1",
     "font-awesome": "^4.7.0",
+    "gh-pages": "^2.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-popper": "^1.3.7",
@@ -17,6 +19,8 @@
     "reactstrap": "^8.4.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
