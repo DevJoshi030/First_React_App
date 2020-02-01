@@ -51,6 +51,7 @@ const allChar = (val) => {
     }
     return false
 }
+const isRated = (val) => val && val !== 'Choose Ratings Stars...';
 
 class RenderCommentInput extends Component {
 
@@ -86,14 +87,22 @@ class RenderCommentInput extends Component {
                     <ModalHeader>Comment</ModalHeader>
                     <ModalBody>
                         <LocalForm onSubmit={ (values) => this.handleSubmit(values) }>
-                            <Label htmlFor="rating">Ratings</Label>
-                            <Control.select model='.ratings' id='ratings' name='ratings' className="form-control">
+                            <Label htmlFor="ratings">Ratings</Label>
+                            <Control.select model='.ratings' id='ratings' name='ratings' className="form-control" 
+                                validators={ { isRated, } }
+                            >
+                                <option>Chooes Ratings Stars...</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
                                 <option>5</option>
                             </Control.select>
+                            <Errors className="text-danger"
+                                model=".ratings"
+                                show="touched"
+                                messages={ { isRated: "Choose a Rating" } }
+                            />
                             <Label htmlFor="name">Your Name</Label>  
                             <Control.text model='.name' id="name" name="name" className="form-control" validators={ {
                                 minLength: minLength(3),
