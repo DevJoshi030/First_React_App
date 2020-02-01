@@ -71,8 +71,7 @@ class RenderCommentInput extends Component {
     }
 
     handleSubmit(values) {
-        alert('Comment Details : ' + JSON.stringify(values));
-        console.log('Comment Details : ' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.ratings, values.name, values.comment)
         this.setState({
             isCommentModalOpen: false
         })
@@ -129,7 +128,7 @@ class RenderCommentInput extends Component {
     }
 }
 
-const DishDetails = ({ dish, comments }) => {
+const DishDetails = ({ dish, comments, addComment }) => {
 
     if (dish !== null && dish !== undefined) {
         return (
@@ -151,7 +150,10 @@ const DishDetails = ({ dish, comments }) => {
                     </div>
                     <div className="col-12 col-md">
                         <RenderComments comments={ comments } />
-                        <RenderCommentInput />
+                        <RenderCommentInput
+                            addComment={ addComment }
+                            dishId={ dish.id }
+                        />
                     </div>
                 </div>
             </div>
