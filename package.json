@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "cross-fetch": "^3.0.4"
+    "cross-fetch": "^3.0.4",
+    "react-transition-group": "^4.3.0"
   }
 }

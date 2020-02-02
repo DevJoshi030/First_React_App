@@ -10,6 +10,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postComment, fetchDishes, fetchPromos, fetchComments } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const mapStateToProps = (state) => {
   return {
@@ -42,23 +43,23 @@ class Main extends Component {
     const HomePage = () => {
         return (
             <Home dish={ this.props.dishes.dishes.filter((dish) => dish.featured)[0] }
-            dishesLoading={ this.props.dishes.isLoading }
-            dishesErrorMsg={ this.props.dishes.errormsg } 
-            leader={ this.props.leaders.filter((leader) => leader.featured)[0] }
-            promosLoading={ this.props.promotions.isLoading }
-            promosErrorMsg={ this.props.promotions.errormsg } 
-            promotion={ this.props.promotions.promotions.filter((promotion) => promotion.featured)[0] } />
+              dishesLoading={ this.props.dishes.isLoading }
+              dishesErrorMsg={ this.props.dishes.errormsg } 
+              leader={ this.props.leaders.filter((leader) => leader.featured)[0] }
+              promosLoading={ this.props.promotions.isLoading }
+              promosErrorMsg={ this.props.promotions.errormsg } 
+              promotion={ this.props.promotions.promotions.filter((promotion) => promotion.featured)[0] } />
         );
     }
 
     const DishWithId = ({ match }) => {
       return (
         <DishDetails dish={ this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0] }
-        isLoading={ this.props.dishes.isLoading }
-        ErrorMsg={ this.props.dishes.errormsg } 
-        comments={ this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId)) }
-        commentsErrorMsg={ this.props.comments.errormsg }     
-        postComment={ this.props.postComment }
+          isLoading={ this.props.dishes.isLoading }
+          ErrorMsg={ this.props.dishes.errormsg } 
+          comments={ this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId)) }
+          commentsErrorMsg={ this.props.comments.errormsg }     
+          postComment={ this.props.postComment }
         />
       );
     }
@@ -72,14 +73,18 @@ class Main extends Component {
     return (
       <div>
         <Header />
-        <Switch>
-            <Route path='/home' component={ HomePage } />
-            <Route exact path='/menu' component={ () => <Menu dishes={ this.props.dishes } /> } />
-            <Route exact path='/contactus' component={ () =>  <Contact resetFeedbackForm={ this.props.resetFeedbackForm } /> } />
-            <Route path="/menu/:dishId" component={ DishWithId } />
-            <Route path="/aboutus" component={ AboutPage } />
-            <Redirect to='/home' />
-        </Switch>
+        <TransitionGroup>
+          <CSSTransition key={ this.props.location.key } classNames="page" timeout={ 300 }>
+            <Switch>
+                <Route path='/home' component={ HomePage } />
+                <Route exact path='/menu' component={ () => <Menu dishes={ this.props.dishes } /> } />
+                <Route exact path='/contactus' component={ () =>  <Contact resetFeedbackForm={ this.props.resetFeedbackForm } /> } />
+                <Route path="/menu/:dishId" component={ DishWithId } />
+                <Route path="/aboutus" component={ AboutPage } />
+                <Redirect to='/home' />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
         <Footer />
       </div>
     );
