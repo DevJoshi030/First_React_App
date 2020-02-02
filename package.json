@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "cross-fetch": "^3.0.4",
+    "prop-types": "^15.7.2",
+    "react-animation-component": "^0.2.3",
+    "react-animation-components": "^3.0.0",
     "react-transition-group": "^4.3.0"
   }
 }
