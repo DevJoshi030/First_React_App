@@ -74,7 +74,7 @@ class RenderCommentInput extends Component {
     }
 
     handleSubmit(values) {
-        this.props.addComment(this.props.dishId, values.ratings, values.name, values.comment)
+        this.props.postComment(this.props.dishId, values.ratings, values.name, values.comment)
         this.setState({
             isCommentModalOpen: false
         })
@@ -131,7 +131,7 @@ class RenderCommentInput extends Component {
     }
 }
 
-const DishDetails = ({ dish, isLoading, ErrorMsg, comments, addComment }) => {
+const DishDetails = ({ dish, isLoading, ErrorMsg, comments, postComment }) => {
 
     if (isLoading) {
         return (
@@ -172,7 +172,7 @@ const DishDetails = ({ dish, isLoading, ErrorMsg, comments, addComment }) => {
                     <div className="col-12 col-md">
                         <RenderComments comments={ comments } />
                         <RenderCommentInput
-                            addComment={ addComment }
+                            postComment={ postComment }
                             dishId={ dish.id }
                         />
                     </div>
