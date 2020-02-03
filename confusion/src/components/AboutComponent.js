@@ -1,32 +1,36 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Fade, Stagger } from 'react-animation-components';
 
 const About = (props) => {
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.leaders.map((leader) => {
         return (
-            <div className="row">
-                <Media>
-                    <div className="col-2 col-md-2 m-1">
-                        <Media left className="m-1">
-                            <Media image src={ leader.image } alt={ leader.name } />
-                        </Media>
-                    </div>
-                    <div className="col-10 col-md m-1">
-                        <Media body className="m-1" right>
-                            <Media heading>
-                                { leader.name }
+            <Fade>
+                <div className="row">
+                    <Media>
+                        <div className="col-2 col-md-2 m-1">
+                            <Media left className="m-1">
+                                <Media image src={ baseUrl + leader.image } alt={ baseUrl + leader.name } />
                             </Media>
-                            <Media title className="mb-2">
-                                { leader.designation }
+                        </div>
+                        <div className="col-10 col-md m-1">
+                            <Media body className="m-1" right>
+                                <Media heading>
+                                    { leader.name }
+                                </Media>
+                                <Media title className="mb-2">
+                                    { leader.designation }
+                                </Media>
+                                { leader.description }
+                                <hr />
                             </Media>
-                            { leader.description }
-                            <hr />
-                        </Media>
-                    </div>
-                </Media>
-            </div>
+                        </div>
+                    </Media>
+                </div>
+            </Fade>
         );
     });
 
@@ -86,7 +90,9 @@ const About = (props) => {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {leaders}
+                        <Stagger in>
+                            {leaders}
+                        </Stagger>
                     </Media>
                 </div>
             </div>

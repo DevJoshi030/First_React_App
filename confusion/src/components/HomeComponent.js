@@ -37,7 +37,7 @@ const RenderCard = ({ item, isLoading, ErrorMsg }) => {
         );
 }
 
-const Home = ({ dish, dishesLoading, dishesErrorMsg, leader, promosLoading, promosErrorMsg, promotion }) => {
+const Home = ({ dish, dishesLoading, dishesErrorMsg, leader, leadersLoading, leadersErrorMsg, promosLoading, promosErrorMsg, promotion }) => {
     return (
         <div className="container">
             <div className="row align-items-start">
@@ -48,7 +48,7 @@ const Home = ({ dish, dishesLoading, dishesErrorMsg, leader, promosLoading, prom
                     <RenderCard item={ promotion } isLoading={ promosLoading } ErrorMsg={ promosErrorMsg } />
                 </div>
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={ leader } />
+                    <RenderCard item={ leader } isLoading={ leadersLoading } ErrorMsg={ leadersErrorMsg } />
                 </div>
             </div>
         </div>
